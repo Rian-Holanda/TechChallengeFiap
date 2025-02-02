@@ -1,0 +1,6 @@
+@API_TechChallengeFiap_HostAddress = http://localhost:5094
+
+GET {{API_TechChallengeFiap_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

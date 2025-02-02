@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Autenticacao\Identity\" />
+    <Folder Include="Medico\Application\Interfaces\" />
+    <Folder Include="Medico\Domain\" />
+    <Folder Include="Medico\Application\" />
+    <Folder Include="Paciente\Application\Interfaces\" />
+    <Folder Include="Paciente\Domain\" />
+    <Folder Include="Paciente\Application\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess_TechChallengeFiap\DataAccess_TechChallengeFiap.csproj" />
+    <ProjectReference Include="..\Entity_TechChallengeFiap\Entity_TechChallengeFiap.csproj" />
+  </ItemGroup>
+
+</Project>

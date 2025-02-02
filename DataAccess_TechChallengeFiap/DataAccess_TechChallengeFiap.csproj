@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Medico\Command\" />
+    <Folder Include="Medico\Interfaces\" />
+    <Folder Include="Medico\" />
+    <Folder Include="Medico\Queries\" />
+    <Folder Include="Paciente\Command\" />
+    <Folder Include="Paciente\Interfaces\" />
+    <Folder Include="Paciente\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Entity_TechChallengeFiap\Entity_TechChallengeFiap.csproj" />
+    <ProjectReference Include="..\Infrastructure_FiapTechChallenge\Infrastructure_FiapTechChallenge.csproj" />
+  </ItemGroup>
+
+</Project>
