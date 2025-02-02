@@ -1,18 +1,35 @@
-name: Docker Image CI
+name: Docker Compose Actions  
+  
+on:  
+  push:  
+    branches:  
+      - main  
+  
+jobs:  
+  deploy:  
+    runs-on: ubuntu-latest  
+  
+    steps:  
+      - name: Checkout code  
+        uses: actions/checkout@v2  
+      
+      - name: Install Docker compose  
+        run: |  
+          sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose  
+          sudo chmod +x /usr/local/bin/docker-compose  
+      
+      - name: Login to DockerHub  
+        uses: docker/login-action@v1  
+        with:  
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}  
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}  
+  
+      - name: Docker compose build  
+        run: DOCKER_HUB_USERNAME=${{ secrets.DOCKER_HUB_USERNAME }} docker-compose -f docker-compose.yml build  
+      
+      - name: Test with the dotnet CLI
+        run: dotnet test ./UnitTest_TechChallengeFiap/UnitTest_TechChallengeFiap.csproj
+  
+      - name: Docker compose push  
+        run: DOCKER_HUB_USERNAME=${{ secrets.DOCKER_HUB_USERNAME }} docker-compose -f docker-compose.yml push
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-jobs:
-
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)

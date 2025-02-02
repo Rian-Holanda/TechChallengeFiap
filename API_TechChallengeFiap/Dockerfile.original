@@ -10,10 +10,6 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["API_TechChallengeFiap/API_TechChallengeFiap.csproj", "API_TechChallengeFiap/"]
-COPY ["Business_TechChallengeFiap/Business_TechChallengeFiap.csproj", "Business_TechChallengeFiap/"]
-COPY ["DataAccess_TechChallengeFiap/DataAccess_TechChallengeFiap.csproj", "DataAccess_TechChallengeFiap/"]
-COPY ["Entity_TechChallengeFiap/Entity_TechChallengeFiap.csproj", "Entity_TechChallengeFiap/"]
-COPY ["Infrastructure_FiapTechChallenge/Infrastructure_FiapTechChallenge.csproj", "Infrastructure_FiapTechChallenge/"]
 RUN dotnet restore "./API_TechChallengeFiap/API_TechChallengeFiap.csproj"
 COPY . .
 WORKDIR "/src/API_TechChallengeFiap"
