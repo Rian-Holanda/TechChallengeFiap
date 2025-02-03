@@ -10,9 +10,9 @@ namespace DataAccess_TechChallengeFiap.Medico.Interfaces
     public interface IMedicoCommand
     {
         Task<List<MedicoEntity>> GetMedicos();
-        //Task<MedicoEntity> GetMedico(int id);
-        //Task<int> InsertMedico (MedicoEntity medico);
-        //Task<bool> UpdateMedico (MedicoEntity medico);
-        //Task<bool> DeleteMedico (int id);
+        Task<MedicoEntity> GetMedico(int id);
+        Task<int> InsertMedico (MedicoEntity medico);
+        Task<bool> UpdateMedico (MedicoEntity medico);
+        Task<bool> DeleteMedico (int id);
     }
 }

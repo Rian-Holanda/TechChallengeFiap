@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Consultas\Commands\" />
+    <Folder Include="Consultas\Queries\" />
     <Folder Include="Medico\Queries\" />
-    <Folder Include="Paciente\Command\" />
-    <Folder Include="Paciente\Interfaces\" />
     <Folder Include="Paciente\Queries\" />
   </ItemGroup>
 

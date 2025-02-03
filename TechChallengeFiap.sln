@@ -23,6 +23,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", 
 		sql.yml = sql.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts_Banco", "Scripts_Banco", "{191D7457-DB68-4EAA-8850-942FD7D11536}"
+	ProjectSection(SolutionItems) = preProject
+		InsertDias.sql = InsertDias.sql
+		InsertHorarios.sql = InsertHorarios.sql
+		InsertHorariosDias.sql = InsertHorariosDias.sql
+		PRC_ListaConsultasDisponiveisMedico.sql = PRC_ListaConsultasDisponiveisMedico.sql
+		PRC_ListaHorariosDia.sql = PRC_ListaHorariosDia.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

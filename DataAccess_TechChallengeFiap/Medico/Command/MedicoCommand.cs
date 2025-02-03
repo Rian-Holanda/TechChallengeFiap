@@ -38,6 +38,64 @@ namespace DataAccess_TechChallengeFiap.Medico.Command
                 return new List<MedicoEntity>();
             }
         }
+
+        public async Task<MedicoEntity> GetMedico(int id) 
+        {
+            try 
+            { 
+                return await context.Medicos.Where(m => m.Id == id).FirstAsync();
+            }
+            catch 
+            { 
+                return new MedicoEntity();
+            }
+        }
+
+        public async Task<int> InsertMedico(MedicoEntity medico)
+        {
+            try 
+            {
+                var result = await context.Medicos.AddAsync(medico);
+
+                return medico.Id;
+            }
+            catch 
+            {
+                return medico.Id;
+            }
+        }
+        public async Task<bool> UpdateMedico(MedicoEntity medico)
+        {
+            try
+            {
+                var result = await context.Medicos
+                            .Where(m => m.Id == medico.Id)
+                            .ExecuteUpdateAsync(setters => setters
+                                                           .SetProperty(m => m.Nome, medico.Nome)
+                                                           .SetProperty(m => m.CPF,  medico.CPF)
+                                                           .SetProperty(m => m.CRM,  medico.CRM));
+
+                return (result > 0);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteMedico(int id) 
+        {
+            try 
+            {
+                var result = (id > 0) ? await context.Medicos.Where(m => m.Id == id).ExecuteDeleteAsync() : 0;
+
+                return (result != 0);
+            }
+            catch 
+            { 
+                return false;
+            }
+        }
     }
 }
 
