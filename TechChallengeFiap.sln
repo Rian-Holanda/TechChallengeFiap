@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_TechChallengeFiap", "API_TechChallengeFiap\API_TechChallengeFiap.csproj", "{F068D1B3-C4CB-4324-A95F-52C8E8BF14F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_TechChallengeFiap", "API_TechChallengeFiap\API_TechChallengeFiap.csproj", "{F068D1B3-C4CB-4324-A95F-52C8E8BF14F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity_TechChallengeFiap", "Entity_TechChallengeFiap\Entity_TechChallengeFiap.csproj", "{296BA618-C9E0-4FA7-94E7-EEBDDCAC86B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entity_TechChallengeFiap", "Entity_TechChallengeFiap\Entity_TechChallengeFiap.csproj", "{296BA618-C9E0-4FA7-94E7-EEBDDCAC86B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure_FiapTechChallenge", "Infrastructure_FiapTechChallenge\Infrastructure_FiapTechChallenge.csproj", "{C65E89E8-EDBB-4D5C-8EDB-1F2308C241A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure_FiapTechChallenge", "Infrastructure_FiapTechChallenge\Infrastructure_FiapTechChallenge.csproj", "{C65E89E8-EDBB-4D5C-8EDB-1F2308C241A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business_TechChallengeFiap", "Business_TechChallengeFiap\Business_TechChallengeFiap.csproj", "{55EFA543-6A04-4AC1-BA1E-17DB8CA35ED7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business_TechChallengeFiap", "Business_TechChallengeFiap\Business_TechChallengeFiap.csproj", "{55EFA543-6A04-4AC1-BA1E-17DB8CA35ED7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess_TechChallengeFiap", "DataAccess_TechChallengeFiap\DataAccess_TechChallengeFiap.csproj", "{EC5EA011-0736-4921-92C4-59A9BB921689}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess_TechChallengeFiap", "DataAccess_TechChallengeFiap\DataAccess_TechChallengeFiap.csproj", "{EC5EA011-0736-4921-92C4-59A9BB921689}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest_TechChallengeFiap", "UnitTest_TechChallengeFiap\UnitTest_TechChallengeFiap.csproj", "{5F36BFB8-FD28-449F-8685-C81EF922793D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest_TechChallengeFiap", "UnitTest_TechChallengeFiap\UnitTest_TechChallengeFiap.csproj", "{5F36BFB8-FD28-449F-8685-C81EF922793D}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{589FC17C-78C7-4C30-8D96-679395EC3FB3}"
 EndProject
@@ -25,11 +25,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts_Banco", "Scripts_Banco", "{191D7457-DB68-4EAA-8850-942FD7D11536}"
 	ProjectSection(SolutionItems) = preProject
-		InsertDias.sql = InsertDias.sql
-		InsertHorarios.sql = InsertHorarios.sql
-		InsertHorariosDias.sql = InsertHorariosDias.sql
-		PRC_ListaConsultasDisponiveisMedico.sql = PRC_ListaConsultasDisponiveisMedico.sql
-		PRC_ListaHorariosDia.sql = PRC_ListaHorariosDia.sql
+		Scripts-Banco\InsertDias.sql = Scripts-Banco\InsertDias.sql
+		Scripts-Banco\InsertHorarios.sql = Scripts-Banco\InsertHorarios.sql
+		Scripts-Banco\InsertHorariosDias.sql = Scripts-Banco\InsertHorariosDias.sql
+		Scripts-Banco\PRC_ListaConsultasDisponiveisMedico.sql = Scripts-Banco\PRC_ListaConsultasDisponiveisMedico.sql
+		Scripts-Banco\PRC_ListaHorariosDia.sql = Scripts-Banco\PRC_ListaHorariosDia.sql
 	EndProjectSection
 EndProject
 Global
