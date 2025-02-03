@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Medico\Command\" />
-    <Folder Include="Medico\Interfaces\" />
-    <Folder Include="Medico\" />
     <Folder Include="Medico\Queries\" />
     <Folder Include="Paciente\Command\" />
     <Folder Include="Paciente\Interfaces\" />

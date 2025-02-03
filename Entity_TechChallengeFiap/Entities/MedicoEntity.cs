@@ -14,6 +14,7 @@ namespace Entity_TechChallengeFiap.Entities
         public string CPF { get; set; } 
         public string CRM { get; set; } 
         public Guid UserId { get; set; }
+        public List<ConsultaEntity>? Consultas { get; set; }
 
     }
 }
