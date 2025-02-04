@@ -14,5 +14,6 @@ namespace Infrastructure_FiapTechChallenge
         public DbSet<PacienteEntity> Pacientes { get; set; }
         int SaveChanges();       
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+
     }
 }
