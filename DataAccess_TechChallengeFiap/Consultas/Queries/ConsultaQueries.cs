@@ -18,19 +18,17 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
     {
         private readonly IAppDbContext context;
         private readonly ILogger<ConsultaQueries>? logger;
-        private readonly string connection;
-        public ConsultaQueries(IAppDbContext context, ILogger<ConsultaQueries>? logger, string connection)
+        public ConsultaQueries(IAppDbContext context, ILogger<ConsultaQueries>? logger)
         {
             this.context = context;
             this.logger = logger;
-            this.connection = connection;
         }
 
         public async Task<DataTable> GetHorariosDias() 
         {
             try 
             {
-                using (DbConfig _dbConfig = new DbConfig(connection))
+                using (DbConfig _dbConfig = new DbConfig())
                 {
                     using (SqlCommand cmd = new SqlCommand("PRC_ListaHorariosDia", _dbConfig.connection))
                     {
@@ -54,7 +52,7 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
         {
             try
             {
-                using (DbConfig _dbConfig = new DbConfig(connection))
+                using (DbConfig _dbConfig = new DbConfig())
                 {
                     using (SqlCommand cmd = new SqlCommand("PRC_ListaConsultasDisponiveisMedico", _dbConfig.connection))
                     {
@@ -78,7 +76,7 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
         {
             try
             {
-                using (DbConfig _dbConfig = new DbConfig(connection))
+                using (DbConfig _dbConfig = new DbConfig())
                 {
                     using (SqlCommand cmd = new SqlCommand("PRC_HorariosConsultas", _dbConfig.connection))
                     {
@@ -101,7 +99,7 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
         {
             try
             {
-                using (DbConfig _dbConfig = new DbConfig(connection))
+                using (DbConfig _dbConfig = new DbConfig())
                 {
                     using (SqlCommand cmd = new SqlCommand("PRC_ConsultasMedico", _dbConfig.connection))
                     {
@@ -125,7 +123,7 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
         {
             try
             {
-                using (DbConfig _dbConfig = new DbConfig(connection))
+                using (DbConfig _dbConfig = new DbConfig())
                 {
                     using (SqlCommand cmd = new SqlCommand("PRC_ConsultasPaciente", _dbConfig.connection))
                     {

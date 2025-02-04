@@ -10,8 +10,8 @@ namespace DataAccess_TechChallengeFiap.Consultas.Interface
     public interface IConsultaCommand
     {
         public Task<int> InsertConsulta(ConsultaEntity consulta, HistoricoConsultasEntity historicoConsulta, HorarioDiaEntity horarioDia);
-        public Task<int> UpdateConsulta(ConsultaEntity consulta, HistoricoConsultasEntity historicoConsulta, HorarioDiaEntity horarioDia);
-        public Task<bool> DeleteConsulta(int idConsulta);
+        public Task<bool> UpdateConsulta(ConsultaEntity consulta, HistoricoConsultasEntity historicoConsulta, HorarioDiaEntity horarioDia);
+        public Task<bool> DeleteConsulta(int idConsulta, int idHistoricoConsulta);
 
     }
 }

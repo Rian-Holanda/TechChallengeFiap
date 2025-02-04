@@ -1,3 +1,5 @@
+using DataAccess_TechChallengeFiap.Consultas.Interface;
+using DataAccess_TechChallengeFiap.Consultas.Queries;
 using Infrastructure_FiapTechChallenge;
 using Infrastructure_FiapTechChallenge.Config;
 using Microsoft.AspNetCore.Identity;
@@ -26,7 +28,8 @@ builder.Services.AddDbContext<IAppDbContext, AppDbContext>(options =>
     options.UseSqlServer(config.GetConnectionString("ConnectionString"));
 });
 
-
+builder.Services.AddScoped<IConsultaQueries, ConsultaQueries>();
+builder.Services.AddScoped<IConsultaCommand, ConsultaCommand>();
 
 
 builder.Services.AddControllers();

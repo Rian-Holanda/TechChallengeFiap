@@ -13,10 +13,10 @@ namespace Infrastructure_FiapTechChallenge.ADO
     {
         public readonly SqlConnection connection;
 
-        public DbConfig(String stringconnection)
+        public DbConfig()
         {
 
-            connection = new SqlConnection(stringconnection);
+            connection = new SqlConnection("Server=localhost,30003;Database=DBFiap;User ID=sa;Password=1q2w3e4r@#;Trusted_Connection=False; TrustServerCertificate=True;");
             connection.Open();
 
         }
