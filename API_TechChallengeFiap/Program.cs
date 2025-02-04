@@ -1,5 +1,10 @@
+using DataAccess_TechChallengeFiap.Consultas.Commands;
 using DataAccess_TechChallengeFiap.Consultas.Interface;
 using DataAccess_TechChallengeFiap.Consultas.Queries;
+using DataAccess_TechChallengeFiap.Medico.Command;
+using DataAccess_TechChallengeFiap.Medico.Interfaces;
+using DataAccess_TechChallengeFiap.Paciente.Command;
+using DataAccess_TechChallengeFiap.Paciente.Interfaces;
 using Infrastructure_FiapTechChallenge;
 using Infrastructure_FiapTechChallenge.Config;
 using Microsoft.AspNetCore.Identity;
@@ -30,6 +35,9 @@ builder.Services.AddDbContext<IAppDbContext, AppDbContext>(options =>
 
 builder.Services.AddScoped<IConsultaQueries, ConsultaQueries>();
 builder.Services.AddScoped<IConsultaCommand, ConsultaCommand>();
+builder.Services.AddScoped<IPacienteCommand, PacienteCommand>();
+builder.Services.AddScoped<IMedicoCommand,   MedicoCommand>();
+
 
 
 builder.Services.AddControllers();
