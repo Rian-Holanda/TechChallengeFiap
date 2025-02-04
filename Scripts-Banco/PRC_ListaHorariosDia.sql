@@ -3,7 +3,8 @@
 As
 
 select 
-	d.Dia, 
+	d.Dia,
+	horarioDia.Id,
 	HorarioInicio.Horario, 
 	HorarioFim.Horario 
 from tb_Dia d

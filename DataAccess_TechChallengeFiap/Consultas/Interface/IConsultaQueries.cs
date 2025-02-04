@@ -15,9 +15,6 @@ namespace DataAccess_TechChallengeFiap.Consultas.Interface
         public Task<DataTable> GetHorariosConsultas();
         public Task<DataTable> GetConsultasMedico(int idMedico);
         public Task<DataTable> GetConsultasPaciente(int idPaciente);
-        public Task<DataTable> GetConsultasMedicos();
-        public Task<DataTable> GetConsultasPacientes();
-        public Task<DataTable> GetHistoricoConsulta(int idConsulta);
 
     }
 }

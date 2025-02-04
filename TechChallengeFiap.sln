@@ -28,6 +28,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts_Banco", "Scripts_Ba
 		Scripts-Banco\InsertDias.sql = Scripts-Banco\InsertDias.sql
 		Scripts-Banco\InsertHorarios.sql = Scripts-Banco\InsertHorarios.sql
 		Scripts-Banco\InsertHorariosDias.sql = Scripts-Banco\InsertHorariosDias.sql
+		PRC_ConsultasMedico.sql = PRC_ConsultasMedico.sql
+		PRC_ConsultasPaciente.sql = PRC_ConsultasPaciente.sql
+		PRC_HorariosConsultas.sql = PRC_HorariosConsultas.sql
 		Scripts-Banco\PRC_ListaConsultasDisponiveisMedico.sql = Scripts-Banco\PRC_ListaConsultasDisponiveisMedico.sql
 		Scripts-Banco\PRC_ListaHorariosDia.sql = Scripts-Banco\PRC_ListaHorariosDia.sql
 	EndProjectSection

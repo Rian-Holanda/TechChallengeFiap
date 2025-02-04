@@ -56,7 +56,7 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
             {
                 using (DbConfig _dbConfig = new DbConfig(connection))
                 {
-                    using (SqlCommand cmd = new SqlCommand("PRC_ConsultasDisponiveisMedico", _dbConfig.connection))
+                    using (SqlCommand cmd = new SqlCommand("PRC_ListaConsultasDisponiveisMedico", _dbConfig.connection))
                     {
                         cmd.Parameters.AddWithValue("@idMedico", idMedico);
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -145,74 +145,5 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
             }
         }
 
-        public async Task<DataTable> GetConsultasMedicos()
-        {
-            try
-            {
-                using (DbConfig _dbConfig = new DbConfig(connection))
-                {
-                    using (SqlCommand cmd = new SqlCommand("PRC_ConsultasMedicos", _dbConfig.connection))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandTimeout = 0;
-
-                        var dt = await _dbConfig.ExecProcedure(cmd);
-
-                        return dt;
-                    }
-                }
-            }
-            catch
-            {
-                return new DataTable();
-            }
-        }
-
-        public async Task<DataTable> GetConsultasPacientes()
-        {
-            try
-            {
-                using (DbConfig _dbConfig = new DbConfig(connection))
-                {
-                    using (SqlCommand cmd = new SqlCommand("PRC_ConsultasPacientes", _dbConfig.connection))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandTimeout = 0;
-
-                        var dt = await _dbConfig.ExecProcedure(cmd);
-
-                        return dt;
-                    }
-                }
-            }
-            catch
-            {
-                return new DataTable();
-            }
-        }
-
-        public async Task<DataTable> GetHistoricoConsulta(int idConsulta)
-        {
-            try
-            {
-                using (DbConfig _dbConfig = new DbConfig(connection))
-                {
-                    using (SqlCommand cmd = new SqlCommand("PRC_HistoricoConsulta", _dbConfig.connection))
-                    {
-                        cmd.Parameters.AddWithValue("@idConsulta", idConsulta);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandTimeout = 0;
-
-                        var dt = await _dbConfig.ExecProcedure(cmd);
-
-                        return dt;
-                    }
-                }
-            }
-            catch
-            {
-                return new DataTable();
-            }
-        }
     }
 }
