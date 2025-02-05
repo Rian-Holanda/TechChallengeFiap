@@ -1,8 +1,10 @@
 ﻿using DataAccess_TechChallengeFiap.Consultas.Interface;
 using DataAccess_TechChallengeFiap.Medico.Command;
+using DataAccess_TechChallengeFiap.Repository;
 using Entity_TechChallengeFiap.Entities;
 using Infrastructure_FiapTechChallenge;
 using Infrastructure_FiapTechChallenge.ADO;
+using Infrastructure_FiapTechChallenge.Util;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using System;
@@ -24,7 +26,9 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
             this.logger = logger;
         }
 
-        public async Task<DataTable> GetHorariosDias() 
+        Util util = new Util();
+
+        public List<ListaHorarioDias> GetHorariosDias() 
         {
             try 
             {
@@ -35,20 +39,22 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 0;
 
-                        var dt = await _dbConfig.ExecProcedure(cmd);
+                        var dt =  _dbConfig.ExecProcedure(cmd);
 
-                        return  dt;
+                        var lista = util.ConvertDataTable<ListaHorarioDias>(dt);
+
+                        return lista;
                     }
                 }
             }
             catch 
             { 
-                return new DataTable();
+                return new List<ListaHorarioDias>();
             }
             
         }
 
-        public async Task<DataTable> GetConsultasDisponiveisMedico(int idMedico)
+        public  List<ConsultasMedico> GetConsultasDisponiveisMedico(int idMedico)
         {
             try
             {
@@ -60,19 +66,21 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 0;
 
-                        var dt = await _dbConfig.ExecProcedure(cmd);
+                        var dt = _dbConfig.ExecProcedure(cmd);
+                        
+                        var lista = util.ConvertDataTable<ConsultasMedico>(dt);
 
-                        return dt;
+                        return lista;
                     }
                 }
             }
             catch
             {
-                return new DataTable();
+                return new List<ConsultasMedico>();
             }
         }
 
-        public async Task<DataTable> GetHorariosConsultas()
+        public  List<Consulta> GetHorariosConsultas()
         {
             try
             {
@@ -83,19 +91,21 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 0;
 
-                        var dt = await _dbConfig.ExecProcedure(cmd);
+                        var dt = _dbConfig.ExecProcedure(cmd);
 
-                        return dt;
+                        var lista = util.ConvertDataTable<Consulta>(dt);
+
+                        return lista;
                     }
                 }
             }
             catch
             {
-                return new DataTable();
+                return new List<Consulta>();
             }
         }
 
-        public async Task<DataTable> GetConsultasMedico(int idMedico)
+        public List<Consulta> GetConsultasMedico(int idMedico)
         {
             try
             {
@@ -107,19 +117,21 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 0;
 
-                        var dt = await _dbConfig.ExecProcedure(cmd);
+                        var dt = _dbConfig.ExecProcedure(cmd);
 
-                        return dt;
+                        var lista = util.ConvertDataTable<Consulta>(dt);
+
+                        return lista;
                     }
                 }
             }
             catch
             {
-                return new DataTable();
+                return new List<Consulta>();
             }
         }
 
-        public async Task<DataTable> GetConsultasPaciente(int idPaciente)
+        public List<Consulta> GetConsultasPaciente(int idPaciente)
         {
             try
             {
@@ -131,15 +143,17 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 0;
 
-                        var dt = await _dbConfig.ExecProcedure(cmd);
+                        var dt = _dbConfig.ExecProcedure(cmd);
 
-                        return dt;
+                        var lista = util.ConvertDataTable<Consulta>(dt);
+
+                        return lista;
                     }
                 }
             }
             catch
             {
-                return new DataTable();
+                return new List<Consulta>();
             }
         }
 

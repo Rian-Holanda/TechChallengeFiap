@@ -21,7 +21,7 @@ namespace Infrastructure_FiapTechChallenge.ADO
 
         }
 
-        public async Task<DataTable> ExecProcedure(SqlCommand cmd)
+        public DataTable ExecProcedure(SqlCommand cmd)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace Infrastructure_FiapTechChallenge.ADO
                     connection.Open();
                 }
 
-                var reader = await cmd.ExecuteReaderAsync();
+                var reader = cmd.ExecuteReader();
                 dt.Load(reader);
 
                 return dt;
