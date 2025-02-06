@@ -1,5 +1,6 @@
 ﻿using Entity_TechChallengeFiap.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Infrastructure_FiapTechChallenge
 {
     public interface IAppDbContext
     {
+        DatabaseFacade Database { get; }
         public DbSet<MedicoEntity> Medicos { get; set; }
         public DbSet<PacienteEntity> Pacientes { get; set; }
         public DbSet<ConsultaEntity> Consultas { get; set; }

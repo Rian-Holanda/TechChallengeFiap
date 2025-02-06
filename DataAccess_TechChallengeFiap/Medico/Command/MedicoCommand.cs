@@ -1,13 +1,10 @@
 ﻿using DataAccess_TechChallengeFiap.Medico.Interfaces;
+using DataAccess_TechChallengeFiap.Repository;
 using Entity_TechChallengeFiap.Entities;
 using Infrastructure_FiapTechChallenge;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess_TechChallengeFiap.Medico.Command
 {
@@ -26,9 +23,8 @@ namespace DataAccess_TechChallengeFiap.Medico.Command
         {
             try 
             {
-                var medicos = await context.Medicos.ToListAsync();
-
-                //var medicosEntity =  (List<MedicoEntity>) medicos.Result.ToList();
+                var medicos = await context.Medicos.ToListAsync();              
+              
 
                 return medicos;
 
@@ -56,6 +52,7 @@ namespace DataAccess_TechChallengeFiap.Medico.Command
             try 
             {
                 var result = await context.Medicos.AddAsync(medico);
+                await context.SaveChangesAsync();
 
                 return medico.Id;
             }
@@ -64,12 +61,12 @@ namespace DataAccess_TechChallengeFiap.Medico.Command
                 return medico.Id;
             }
         }
-        public async Task<bool> UpdateMedico(MedicoEntity medico)
+        public async Task<bool> UpdateMedico(int id, MedicoRepository medico)
         {
             try
             {
                 var result = await context.Medicos
-                            .Where(m => m.Id == medico.Id)
+                            .Where(m => m.Id == id)
                             .ExecuteUpdateAsync(setters => setters
                                                            .SetProperty(m => m.Nome, medico.Nome)
                                                            .SetProperty(m => m.CPF,  medico.CPF)

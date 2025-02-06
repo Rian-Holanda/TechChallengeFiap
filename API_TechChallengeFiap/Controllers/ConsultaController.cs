@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API_TechChallengeFiap.Controllers
 {
-    public class ConsultaController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ConsultaController : ControllerBase
     {
         private readonly IConsultaCommand _consultaCommand;
         private readonly IConsultaQueries _consultaQueries;
@@ -14,9 +16,10 @@ namespace API_TechChallengeFiap.Controllers
            _consultaQueries = consultaQueries;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return Ok();
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using Entity_TechChallengeFiap.Entities;
+﻿using DataAccess_TechChallengeFiap.Medico.Interfaces;
+using DataAccess_TechChallengeFiap.Repository;
 using Infrastructure_FiapTechChallenge;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API_TechChallengeFiap.Controllers
 {
@@ -9,20 +9,48 @@ namespace API_TechChallengeFiap.Controllers
     [ApiController]
     public class MedicoController : ControllerBase
     {
-        private readonly IAppDbContext _context;
+        private readonly IMedicoQueries medicoQueries;
+        private readonly IMedicoCommand medicoCommand;
 
-        public MedicoController(IAppDbContext context)
-        {
-            this._context = context;
+        public MedicoController(IAppDbContext context, IMedicoQueries medicoQueries, IMedicoCommand medicoCommand)        {
+           
+            this.medicoQueries = medicoQueries;
+            this.medicoCommand = medicoCommand;
         }
 
+
         [HttpGet("todos")]
-        public async Task<ActionResult<IEnumerable<MedicoEntity>>> GetMedicosAsync()
+        public async Task<IActionResult> GetMedicosAsync()        
         {
 
-            var pacientes = await _context.Medicos.ToListAsync();
+            var medicos = await medicoQueries.GetMedicos();
 
-            return Ok(pacientes);
+            return Ok(medicos);
+        }
+
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPacienteAsync(int id)
+        {
+
+            var medicos = await medicoQueries.GetMedico(id);
+
+            return Ok(medicos);
+        }
+
+        [HttpPut("{id}")]
+
+        public async Task<IActionResult> PutAsync(int id, [FromBody] MedicoRepository value)
+        {
+            var medico = await medicoCommand.UpdateMedico(id, value);
+            return Ok(medico);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var medico = await medicoCommand.DeleteMedico(id);
+            return Ok(medico);
         }
     }
 }

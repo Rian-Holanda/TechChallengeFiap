@@ -1,14 +1,11 @@
 ﻿using DataAccess_TechChallengeFiap.Paciente.Command;
 using DataAccess_TechChallengeFiap.Paciente.Interfaces;
+using DataAccess_TechChallengeFiap.Repository;
 using Entity_TechChallengeFiap.Entities;
 using Infrastructure_FiapTechChallenge;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DataAccess_TechChallengeFiap.Paciente.Command
 {
@@ -23,38 +20,13 @@ namespace DataAccess_TechChallengeFiap.Paciente.Command
             this.logger = logger;
         }
 
-        public async Task<List<PacienteEntity>> GetPacientes()
-        {
-            try
-            {
-                var pacientes = await context.Pacientes.ToListAsync();
-
-                //var PacientesEntity =  (List<PacienteEntity>) Pacientes.Result.ToList();
-
-                return pacientes;
-
-            }
-            catch
-            {
-                return new List<PacienteEntity>();
-            }
-        }
-        public async Task<PacienteEntity> GetPaciente(int id)
-        {
-            try
-            {
-                return await context.Pacientes.Where(m => m.Id == id).FirstAsync();
-            }
-            catch
-            {
-                return new PacienteEntity();
-            }
-        }
+  
         public async Task<int> InsertPaciente(PacienteEntity paciente)
         {
             try
             {
                 var result = await context.Pacientes.AddAsync(paciente);
+                await context.SaveChangesAsync();
 
                 return paciente.Id;
             }
@@ -63,12 +35,12 @@ namespace DataAccess_TechChallengeFiap.Paciente.Command
                 return paciente.Id;
             }
         }
-        public async Task<bool> UpdatePaciente(PacienteEntity paciente)
+        public async Task<bool> UpdatePaciente(int id, PacienteRepository paciente)
         {
             try
             {
                 var result = await context.Pacientes
-                            .Where(m => m.Id == paciente.Id)
+                            .Where(m => m.Id == id)
                             .ExecuteUpdateAsync(setters => setters
                                                            .SetProperty(p => p.Nome, paciente.Nome)
                                                            .SetProperty(p => p.CPF, paciente.CPF));
