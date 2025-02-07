@@ -13,10 +13,11 @@ namespace DataAccess_TechChallengeFiap.Consultas.Interface
         public Task<bool> UpdateConsulta(ConsultaEntity consulta, HistoricoConsultasEntity historicoConsulta, HorarioDiaEntity horarioDia);
         public Task<bool> DeleteConsulta(int idConsulta, int idHistoricoConsulta);
         public Task<HorarioEntity> GetHorario(string horario);
-        public Task<HorarioDiaEntity> GetHorarioDia(int idHorarioInicio);
+        public Task<HorarioDiaEntity> GetHorarioDia(int idHorarioInicio, int idDia);
         public Task<ConsultaEntity> GetConsulta(int idConsulta);
         public Task<HistoricoConsultasEntity> GetHistoricoConsulta(int idConsulta);
         public Task<DiaEntity> GetDia(int idDia);
+        public Task<DiaEntity> GetDiaNome(string dia);
 
 
     }

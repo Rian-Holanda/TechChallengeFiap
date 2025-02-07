@@ -80,8 +80,8 @@ namespace Infrastructure_FiapTechChallenge
                       .WithOne(e => e.HistoricoConsulta)
                       .HasForeignKey<HistoricoConsultasEntity>(e => e.IdConsuta);
                 entity.HasOne(e => e.HorarioDia)
-                     .WithOne(e => e.HistoricoConsulta)
-                     .HasForeignKey<HistoricoConsultasEntity>(e => e.IdHorarioDia);
+                     .WithMany(e => e.HistoricoConsulta)
+                     .HasForeignKey(e => e.IdHorarioDia);
 
             });
 

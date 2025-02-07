@@ -31,11 +31,11 @@ namespace DataAccess_TechChallengeFiap.Consultas.Commands
 
                 if (idConsulta > 0) 
                 {
-                    historicoConsulta.IdConsuta = idConsulta;
+                    historicoConsulta.IdConsuta = consulta.Id;
                     var idHistoricoConsulta = await context.HistoricoConsultas.Add(historicoConsulta).Context.SaveChangesAsync();
                 }
 
-                return idConsulta;
+                return consulta.Id;
             }
             catch 
             { 
@@ -57,9 +57,8 @@ namespace DataAccess_TechChallengeFiap.Consultas.Commands
                 
                 if(resultConsulta != 0) 
                 {
-                    var resultHistorico = await context.HistoricoConsultas.Where(c => c.Id == consulta.Id)
+                    var resultHistorico = await context.HistoricoConsultas.Where(c => c.Id == historicoConsulta.Id)
                                                                           .ExecuteUpdateAsync(setters => setters
-                                                                            .SetProperty(c => c.IdConsuta, consulta.Id)
                                                                             .SetProperty(c => c.IdHorarioDia, historicoConsulta.IdHorarioDia));
                     
                     
@@ -109,11 +108,11 @@ namespace DataAccess_TechChallengeFiap.Consultas.Commands
             }
         }
 
-        public async Task<HorarioDiaEntity> GetHorarioDia(int idHorarioInicio)
+        public async Task<HorarioDiaEntity> GetHorarioDia(int idHorarioInicio, int idDia)
         {
             try
             {
-                return await context.HorariosDias.Where(h => h.IdHorarioInicio == idHorarioInicio).FirstAsync();
+                return await context.HorariosDias.Where(h => h.IdHorarioInicio == idHorarioInicio && h.IdDia == idDia).FirstAsync();
             }
             catch
             {
@@ -151,6 +150,19 @@ namespace DataAccess_TechChallengeFiap.Consultas.Commands
             try
             {
                 return await context.Dias.Where(d => d.Id == idDia).FirstAsync();
+            }
+            catch
+            {
+                return new DiaEntity();
+            }
+        }
+
+        public async Task<DiaEntity> GetDiaNome(string dia)
+        {
+
+            try
+            {
+                return await context.Dias.Where(d => d.Dia == dia).FirstAsync();
             }
             catch
             {

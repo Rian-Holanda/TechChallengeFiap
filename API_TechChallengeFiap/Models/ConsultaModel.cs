@@ -6,6 +6,7 @@
         public string? CRM { get; set; }
         public string? Paciente { get; set; }
         public string? Horario { get; set; }
+        public string? Dia { get; set; }
         public DateTime Data {  get; set; }
     }
 }

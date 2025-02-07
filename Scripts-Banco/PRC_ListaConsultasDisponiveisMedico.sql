@@ -1,6 +1,7 @@
 ﻿create or alter procedure PRC_ListaConsultasDisponiveisMedico
 @IdMedico int,
-@DataConsulta datetime
+@DataConsulta datetime,
+@Dia varchar(20)
 
 AS
 
@@ -18,8 +19,11 @@ inner join tb_Medico medico on medico.Id = consulta.IdMedico and medico.Id = @Id
 where YEAR(historico.DataConsulta) =  YEAR(@DataConsulta)
 and   MONTH(historico.DataConsulta) = MONTH(@DataConsulta)
 and   DAY(historico.DataConsulta) =    DAY(@DataConsulta)
-
-select * from tb_HorarioDia horarioDia
+and   d.Dia = @Dia
+select  
+	(select Dia from tb_Dia where Id = horarioDia.IdDia) as Dia,
+	(select Horario from tb_Horario where Id = horarioDia.IdHorarioInicio) as Horario
+from tb_HorarioDia horarioDia
 where horarioDia.Id not in (select IdHorarioDia from #consultas_agendadas)
 
 

@@ -6,6 +6,7 @@ using DataAccess_TechChallengeFiap.Paciente.Interfaces;
 using DataAccess_TechChallengeFiap.Repository;
 using Entity_TechChallengeFiap.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace API_TechChallengeFiap.Controllers
 {
@@ -45,7 +46,9 @@ namespace API_TechChallengeFiap.Controllers
         [HttpGet("GetConsultasDisponiveisMedico/id/data")]
         public IActionResult GetConsultasDisponiveisMedico(int id, DateTime data)
         {
-            var horariosConsultas = _consultaQueries.GetConsultasDisponiveisMedico(id, data);
+            var dia = data.ToString(@"dddd", new CultureInfo("PT-br")).Replace("-feira","");
+
+            var horariosConsultas = _consultaQueries.GetConsultasDisponiveisMedico(id, data, dia);
 
             if (horariosConsultas != null)
             {
@@ -114,9 +117,9 @@ namespace API_TechChallengeFiap.Controllers
             medicoEntity = _medicoCommand.GetMedicoPorNome(consultaModel?.Medico).Result;
             pacienteEntity = _pacienteCommand.GetPacientePorNome(consultaModel.Paciente).Result;
             horarioEntity = _consultaCommand.GetHorario(consultaModel.Horario).Result;
-            horarioDiaEntity = _consultaCommand.GetHorarioDia(horarioEntity.Id).Result;
-            diaEntity = _consultaCommand.GetDia(horarioDiaEntity.IdDia).Result;
-            var consultasMedico = _consultaQueries.GetConsultasDisponiveisMedico(medicoEntity.Id, consultaModel.Data);
+            diaEntity = _consultaCommand.GetDiaNome(consultaModel.Dia).Result;
+            horarioDiaEntity = _consultaCommand.GetHorarioDia(horarioEntity.Id, diaEntity.Id).Result;
+            var consultasMedico = _consultaQueries.GetConsultasDisponiveisMedico(medicoEntity.Id, consultaModel.Data, diaEntity.Dia);
 
             if (_consultaBusiness.ValidaConsultaDisponivel(diaEntity.Dia, horarioEntity.Horario, consultasMedico))
             {
@@ -124,11 +127,15 @@ namespace API_TechChallengeFiap.Controllers
                 {
                     IdMedico = medicoEntity.Id,
                     IdPaciente = pacienteEntity.Id,
-                    DataMarcacaoConsulta = consultaModel.Data
+                    DataMarcacaoConsulta = DateTime.Now
 
                 };
 
-                HistoricoConsultasEntity historicoConsulta = new HistoricoConsultasEntity() { IdHorarioDia = horarioDiaEntity.Id };
+                HistoricoConsultasEntity historicoConsulta = new HistoricoConsultasEntity() 
+                { 
+                    IdHorarioDia = horarioDiaEntity.Id,
+                    DataConsulta = consultaModel.Data
+                };
 
                 var result = await _consultaCommand.InsertConsulta(consulta, historicoConsulta, horarioDiaEntity);
 
@@ -162,9 +169,9 @@ namespace API_TechChallengeFiap.Controllers
             medicoEntity = _medicoCommand.GetMedicoPorNome(consultaModel?.Medico).Result;
             pacienteEntity = _pacienteCommand.GetPacientePorNome(consultaModel.Paciente).Result;
             horarioEntity = _consultaCommand.GetHorario(consultaModel.Horario).Result;
-            horarioDiaEntity = _consultaCommand.GetHorarioDia(horarioEntity.Id).Result;
-            diaEntity = _consultaCommand.GetDia(horarioDiaEntity.IdDia).Result;
-            var consultasMedico = _consultaQueries.GetConsultasDisponiveisMedico(medicoEntity.Id, consultaModel.Data);
+            diaEntity = _consultaCommand.GetDiaNome(consultaModel.Dia).Result;
+            horarioDiaEntity = _consultaCommand.GetHorarioDia(horarioEntity.Id, diaEntity.Id).Result;
+            var consultasMedico = _consultaQueries.GetConsultasDisponiveisMedico(medicoEntity.Id, consultaModel.Data, diaEntity.Dia);
 
             if (_consultaBusiness.ValidaConsultaDisponivel(diaEntity.Dia, horarioEntity.Horario, consultasMedico))
             {
@@ -174,13 +181,14 @@ namespace API_TechChallengeFiap.Controllers
                     Id = id,
                     IdMedico = medicoEntity.Id,
                     IdPaciente = pacienteEntity.Id,
-                    DataMarcacaoConsulta = consultaModel.Data
+                    DataMarcacaoConsulta = DateTime.Now
 
                 };
 
                 HistoricoConsultasEntity historicoConsulta = new HistoricoConsultasEntity();
                 historicoConsulta = _consultaCommand.GetHistoricoConsulta(id).Result;
                 historicoConsulta.IdHorarioDia = horarioDiaEntity.Id;
+                historicoConsulta.DataConsulta = consultaModel.Data;
 
                 var result = await _consultaCommand.UpdateConsulta(consulta, historicoConsulta, horarioDiaEntity);
 
