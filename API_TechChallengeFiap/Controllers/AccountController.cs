@@ -1,10 +1,11 @@
 ﻿using API_TechChallengeFiap.Models;
+using DataAccess_TechChallengeFiap.Medico.Interfaces;
+using DataAccess_TechChallengeFiap.Paciente.Interfaces;
 using Entity_TechChallengeFiap.Entities;
 using Infrastructure_FiapTechChallenge;
 using Infrastructure_FiapTechChallenge.Config;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API_TechChallengeFiap.Controllers
 {
@@ -15,12 +16,16 @@ namespace API_TechChallengeFiap.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IAppDbContext _context;
+        private readonly IMedicoCommand _medicoCommand;
+        private readonly IPacienteCommand _pacienteCommand;
 
-        public AccountController(UserManager<ApplicationUser> userManager, IAppDbContext context, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<ApplicationUser> userManager, IAppDbContext _context, RoleManager<IdentityRole> roleManager, IMedicoCommand medicoCommand, IPacienteCommand pacienteCommand)
         {
             this._userManager = userManager;
-            this._context = context;
+            this._context = _context;
             this._roleManager = roleManager;
+            this._medicoCommand = medicoCommand;
+            this._pacienteCommand = pacienteCommand;
         }
 
         [HttpPost("Login")]
@@ -31,26 +36,25 @@ namespace API_TechChallengeFiap.Controllers
                 return BadRequest(ModelState);
             }
 
-       
+
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 return Unauthorized(new { Message = "E-mail ou senha inválidos." });
             }
 
-   
+
             var isPasswordValid = await _userManager.CheckPasswordAsync(user, model.Senha);
             if (!isPasswordValid)
             {
                 return Unauthorized(new { Message = "E-mail ou senha inválidos." });
-            }     
+            }
 
             return Ok(new
-            {                
+            {
                 Message = "Login realizado com sucesso!"
             });
         }
-
 
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
@@ -61,6 +65,7 @@ namespace API_TechChallengeFiap.Controllers
             }
 
             var existingUser = await _userManager.FindByEmailAsync(model.Email);
+            int retorno = 0;
 
             if (existingUser != null)
             {
@@ -68,60 +73,70 @@ namespace API_TechChallengeFiap.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser
-            {
-                UserName = model.Email, 
-                Email = model.Email,
-            };
-            
-            var result = await _userManager.CreateAsync(user, model.Senha);
+            using var transaction = await _context.Database.BeginTransactionAsync();
 
-            if (result.Succeeded)
+            try
             {
-                
-                if (model.IsMedico)
-                {         
-                    await _userManager.AddToRoleAsync(user, "Medico");
-
-                    var medico = new MedicoEntity
-                    {
-                        Nome = model.Nome,
-                        CRM = model.CRM,
-                        CPF = model.CPF,
-                        UserId = Guid.Parse(user.Id)
-                    };
-                    _context.Medicos.Add(medico);
-                  
-                }
-                else
+                var user = new ApplicationUser
                 {
-                    await _userManager.AddToRoleAsync(user, "Paciente");
+                    UserName = model.Email,
+                    Email = model.Email,
+                };
 
-                    var paciente = new PacienteEntity
+                var result = await _userManager.CreateAsync(user, model.Senha);
+
+                if (result.Succeeded)
+                {
+                    if (model.IsMedico)
                     {
-                        Nome = model.Nome,
-                        CPF = model.CPF,
-                        UserId = Guid.Parse(user.Id)
-                    };
+                        await _userManager.AddToRoleAsync(user, "Medico");
 
-                    _context.Pacientes.Add(paciente);
-                   
+                        var medico = new MedicoEntity
+                        {
+                            Nome = model.Nome,
+                            CRM = model.CRM,
+                            CPF = model.CPF,
+                            UserId = Guid.Parse(user.Id)
+                        };
+
+                        retorno = await _medicoCommand.InsertMedico(medico);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "Paciente");
+
+                        var paciente = new PacienteEntity
+                        {
+                            Nome = model.Nome,
+                            CPF = model.CPF,
+                            UserId = Guid.Parse(user.Id)
+                        };
+
+                        retorno = await _pacienteCommand.InsertPaciente(paciente);
+
+                    }
+
+                    await _context.SaveChangesAsync();
+
+                    transaction.Commit();
+
+                    return Ok(new { Return = retorno, Message = "Usuário registrado com sucesso!" });
                 }
 
-                await _context.SaveChangesAsync();
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
 
-                return Ok(new { Message = "Usuário registrado com sucesso!" });
+                return BadRequest(ModelState);
             }
-
-           
-            foreach (var error in result.Errors)
+            catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                transaction.Rollback();
+                return StatusCode(500, ex.Message);
             }
-
-            return BadRequest(ModelState);
+           
         }
-
 
         [HttpPost]
         [Route("create/rule")]
@@ -157,15 +172,15 @@ namespace API_TechChallengeFiap.Controllers
             {
                 return BadRequest(ModelState);
             }
-                        
+
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 return NotFound(new { Message = "Usuário não encontrado." });
             }
-           
+
             user.UserName = model.Email;
-            user.Email = model.Email;    
+            user.Email = model.Email;
 
             var updateResult = await _userManager.UpdateAsync(user);
             if (!updateResult.Succeeded)
@@ -176,38 +191,11 @@ namespace API_TechChallengeFiap.Controllers
                 }
                 return BadRequest(ModelState);
             }
-       
-            if (model.IsMedico)
-            {
-                var medico = await _context.Medicos.FirstOrDefaultAsync(m => m.UserId == Guid.Parse(user.Id));
-                if (medico == null)
-                {
-                    return NotFound(new { Message = "Médico não encontrado." });
-                }
-
-                medico.Nome = model.Nome;
-                medico.CRM = model.CRM;
-                medico.CPF = model.CPF;
-
-                _context.Medicos.Update(medico);
-            }
-            else
-            {
-                var paciente = await _context.Pacientes.FirstOrDefaultAsync(p => p.UserId == Guid.Parse(user.Id));
-                if (paciente == null)
-                {
-                    return NotFound(new { Message = "Paciente não encontrado." });
-                }
-
-                paciente.Nome = model.Nome;
-                paciente.CPF = model.CPF;    
-
-                _context.Pacientes.Update(paciente);
-            }
 
             await _context.SaveChangesAsync();
 
             return Ok(new { Message = "Usuário atualizado com sucesso!" });
         }
+
     }
 }

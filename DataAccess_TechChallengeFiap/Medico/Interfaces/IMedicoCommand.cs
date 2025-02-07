@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess_TechChallengeFiap.Repository;
 using Entity_TechChallengeFiap.Entities;
 
 namespace DataAccess_TechChallengeFiap.Medico.Interfaces
@@ -14,7 +15,7 @@ namespace DataAccess_TechChallengeFiap.Medico.Interfaces
         Task<MedicoEntity> GetMedicoPorNome(string nome);
         Task<MedicoEntity> GetMedicoPorCRM(string crm);
         Task<int> InsertMedico (MedicoEntity medico);
-        Task<bool> UpdateMedico (MedicoEntity medico);
+        Task<bool> UpdateMedico (int id, MedicoRepository medico);
         Task<bool> DeleteMedico (int id);
     }
 }

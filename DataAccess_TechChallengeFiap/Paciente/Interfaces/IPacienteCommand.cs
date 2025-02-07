@@ -1,4 +1,6 @@
-﻿using Entity_TechChallengeFiap.Entities;
+﻿
+using Entity_TechChallengeFiap.Entities;
+using DataAccess_TechChallengeFiap.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,7 @@ namespace DataAccess_TechChallengeFiap.Paciente.Interfaces
         Task<PacienteEntity> GetPaciente(int id);
         Task<PacienteEntity> GetPacientePorNome(string nome);
         Task<int> InsertPaciente(PacienteEntity paciente);
-        Task<bool> UpdatePaciente(PacienteEntity paciente);
+        Task<bool> UpdatePaciente(int id, PacienteRepository paciente);
         Task<bool> DeletePaciente(int id);
     }
 }

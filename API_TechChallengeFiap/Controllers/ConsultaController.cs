@@ -10,7 +10,9 @@ using System.Globalization;
 
 namespace API_TechChallengeFiap.Controllers
 {
-    public class ConsultaController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ConsultaController : ControllerBase
     {
         private readonly IConsultaCommand _consultaCommand;
         private readonly IConsultaQueries _consultaQueries;
