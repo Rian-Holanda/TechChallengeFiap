@@ -43,13 +43,26 @@ namespace DataAccess_TechChallengeFiap.Paciente.Command
         {
             try
             {
-                return await context.Pacientes.Where(m => m.Id == id).FirstAsync();
+                return await context.Pacientes.Where(p => p.Id == id).FirstAsync();
             }
             catch
             {
                 return new PacienteEntity();
             }
         }
+
+        public async Task<PacienteEntity> GetPacientePorNome(string nome)
+        {
+            try
+            {
+                return await context.Pacientes.Where(p => p.Nome == nome).FirstAsync();
+            }
+            catch
+            {
+                return new PacienteEntity();
+            }
+        }
+
         public async Task<int> InsertPaciente(PacienteEntity paciente)
         {
             try

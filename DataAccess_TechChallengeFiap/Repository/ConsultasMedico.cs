@@ -8,10 +8,8 @@ namespace DataAccess_TechChallengeFiap.Repository
 {
     public class ConsultasMedico
     {
-        public int Id { get; set; }
         public string? Dia {  get; set; }
-        public string? HorarioInicio { get; set; }
-        public string? HorarioFim { get; set; }
+        public string? Horario { get; set; }
 
     }
 }

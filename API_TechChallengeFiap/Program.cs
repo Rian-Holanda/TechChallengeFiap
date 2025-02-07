@@ -1,3 +1,5 @@
+using Business_TechChallengeFiap.Consulta.Domain;
+using Business_TechChallengeFiap.Consulta.Interface;
 using DataAccess_TechChallengeFiap.Consultas.Commands;
 using DataAccess_TechChallengeFiap.Consultas.Interface;
 using DataAccess_TechChallengeFiap.Consultas.Queries;
@@ -37,8 +39,7 @@ builder.Services.AddScoped<IConsultaQueries, ConsultaQueries>();
 builder.Services.AddScoped<IConsultaCommand, ConsultaCommand>();
 builder.Services.AddScoped<IPacienteCommand, PacienteCommand>();
 builder.Services.AddScoped<IMedicoCommand,   MedicoCommand>();
-
-
+builder.Services.AddScoped<IConsultaBusiness, ConsultaBusiness>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

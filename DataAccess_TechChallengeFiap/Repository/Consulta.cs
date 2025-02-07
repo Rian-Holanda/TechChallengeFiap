@@ -11,6 +11,7 @@ namespace DataAccess_TechChallengeFiap.Repository
         public string? Medico { get; set; }
         public string? Paciente { get; set; }
         public DateTime? DataConsulta { get; set; }
+        public DateTime? DataMarcacaoConsulta { get; set; }
         public string? Dia { get; set; }
         public string? Horario { get; set; }
     }

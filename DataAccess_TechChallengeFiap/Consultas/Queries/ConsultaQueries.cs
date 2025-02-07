@@ -54,7 +54,7 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
             
         }
 
-        public  List<ConsultasMedico> GetConsultasDisponiveisMedico(int idMedico)
+        public  List<ConsultasMedico> GetConsultasDisponiveisMedico(int idMedico, DateTime dataConsulta)
         {
             try
             {
@@ -63,6 +63,7 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
                     using (SqlCommand cmd = new SqlCommand("PRC_ListaConsultasDisponiveisMedico", _dbConfig.connection))
                     {
                         cmd.Parameters.AddWithValue("@idMedico", idMedico);
+                        cmd.Parameters.AddWithValue("@DataConsulta", dataConsulta);
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 0;
 

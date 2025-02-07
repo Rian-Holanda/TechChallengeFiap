@@ -11,6 +11,8 @@ namespace DataAccess_TechChallengeFiap.Medico.Interfaces
     {
         Task<List<MedicoEntity>> GetMedicos();
         Task<MedicoEntity> GetMedico(int id);
+        Task<MedicoEntity> GetMedicoPorNome(string nome);
+        Task<MedicoEntity> GetMedicoPorCRM(string crm);
         Task<int> InsertMedico (MedicoEntity medico);
         Task<bool> UpdateMedico (MedicoEntity medico);
         Task<bool> DeleteMedico (int id);

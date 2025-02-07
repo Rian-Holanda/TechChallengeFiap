@@ -61,7 +61,7 @@ namespace Infrastructure_FiapTechChallenge
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.IdMedico);
                 entity.Property(e => e.IdPaciente);
-                entity.Property(e => e.DataConsulta);
+                entity.Property(e => e.DataMarcacaoConsulta);
                 entity.HasOne(e => e.Medico)
                       .WithMany(e => e.Consultas)
                       .HasForeignKey(e => e.IdMedico);

@@ -1,5 +1,6 @@
 ﻿using DataAccess_TechChallengeFiap.Consultas.Interface;
 using DataAccess_TechChallengeFiap.Consultas.Queries;
+using DataAccess_TechChallengeFiap.Repository;
 using Entity_TechChallengeFiap.Entities;
 using Infrastructure_FiapTechChallenge;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,7 @@ namespace DataAccess_TechChallengeFiap.Consultas.Commands
 
                 if (idConsulta > 0) 
                 {
+                    historicoConsulta.IdConsuta = idConsulta;
                     var idHistoricoConsulta = await context.HistoricoConsultas.Add(historicoConsulta).Context.SaveChangesAsync();
                 }
 
@@ -51,7 +53,7 @@ namespace DataAccess_TechChallengeFiap.Consultas.Commands
                                                             .ExecuteUpdateAsync(setters => setters
                                                                     .SetProperty(c => c.IdMedico, consulta.IdMedico)
                                                                     .SetProperty(c => c.IdPaciente, consulta.IdPaciente)
-                                                                    .SetProperty(c => c.DataConsulta, consulta.DataConsulta));
+                                                                    .SetProperty(c => c.DataMarcacaoConsulta, consulta.DataMarcacaoConsulta));
                 
                 if(resultConsulta != 0) 
                 {
@@ -92,6 +94,67 @@ namespace DataAccess_TechChallengeFiap.Consultas.Commands
             catch 
             {
                 return false;
+            }
+        }
+
+        public async Task<HorarioEntity> GetHorario(string horario) 
+        {
+            try 
+            { 
+                return await context.Horarios.Where(h => h.Horario == horario).FirstAsync();
+            }
+            catch 
+            { 
+                return new HorarioEntity();
+            }
+        }
+
+        public async Task<HorarioDiaEntity> GetHorarioDia(int idHorarioInicio)
+        {
+            try
+            {
+                return await context.HorariosDias.Where(h => h.IdHorarioInicio == idHorarioInicio).FirstAsync();
+            }
+            catch
+            {
+                return new HorarioDiaEntity();
+            }
+        }
+
+        public async Task<ConsultaEntity> GetConsulta(int idConsulta) 
+        {
+            try
+            {
+                return await context.Consultas.Where(c => c.Id == idConsulta).FirstAsync();
+            }
+            catch
+            {
+                return new ConsultaEntity();
+            }
+        }
+
+        public async Task<HistoricoConsultasEntity> GetHistoricoConsulta(int idConsulta) 
+        {
+            try
+            {
+                return await context.HistoricoConsultas.Where(c => c.IdConsuta == idConsulta).FirstAsync();
+            }
+            catch
+            {
+                return new HistoricoConsultasEntity();
+            }
+        }
+
+        public async Task<DiaEntity> GetDia(int idDia) 
+        {
+
+            try
+            {
+                return await context.Dias.Where(d => d.Id == idDia).FirstAsync();
+            }
+            catch
+            {
+                return new DiaEntity();
             }
         }
     }

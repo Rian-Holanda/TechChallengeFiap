@@ -51,6 +51,30 @@ namespace DataAccess_TechChallengeFiap.Medico.Command
             }
         }
 
+        public async Task<MedicoEntity> GetMedicoPorNome(string nome)
+        {
+            try
+            {
+                return await context.Medicos.Where(m => m.Nome == nome).FirstAsync();
+            }
+            catch
+            {
+                return new MedicoEntity();
+            }
+        }
+
+        public async Task<MedicoEntity> GetMedicoPorCRM(string crm)
+        {
+            try
+            {
+                return await context.Medicos.Where(m => m.CRM == crm).FirstAsync();
+            }
+            catch
+            {
+                return new MedicoEntity();
+            }
+        }
+
         public async Task<int> InsertMedico(MedicoEntity medico)
         {
             try 
