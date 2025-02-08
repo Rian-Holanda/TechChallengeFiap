@@ -19,7 +19,7 @@ namespace UnitTest_TechChallengeFiap
     public class TesteConsultas
     {
         //using the same connection string
-        public static string connectionString = $"Data Source=sqlserver,1433;Initial Catalog=DBFiap;Persist Security Info=True;User ID=sa;Password=1q2w3e4r@#;TrustServerCertificate=true";
+        public static string connectionString = $"Data Source=localhost,30003;Initial Catalog=DBFiap;Persist Security Info=True;User ID=sa;Password=1q2w3e4r@#;TrustServerCertificate=true";
 
 
 
