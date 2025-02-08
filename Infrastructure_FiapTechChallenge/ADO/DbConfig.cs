@@ -16,7 +16,7 @@ namespace Infrastructure_FiapTechChallenge.ADO
         public DbConfig()
         {
 
-            connection = new SqlConnection("Server=sqlserver,30003;Database=DBFiap;User ID=sa;Password=1q2w3e4r@#;Trusted_Connection=False; TrustServerCertificate=True;");
+            connection = new SqlConnection("Data Source=sqlserver,1433;Initial Catalog=DBFiap;Persist Security Info=True;User ID=sa;Password=1q2w3e4r@#;TrustServerCertificate=true");
             connection.Open();
 
         }
