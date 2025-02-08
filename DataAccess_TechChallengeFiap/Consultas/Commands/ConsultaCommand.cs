@@ -72,6 +72,27 @@ namespace DataAccess_TechChallengeFiap.Consultas.Commands
                 return false;
             }
         }
+
+        public async Task<bool> UpdateAprovacaoConsulta(ConsultaEntity consulta) 
+        {
+            try 
+            {
+                var resultConsulta = await context.Consultas.Where(c => c.Id == consulta.Id)
+                                                            .ExecuteUpdateAsync(setters => setters
+                                                                    .SetProperty(c => c.IdMedico, consulta.IdMedico)
+                                                                    .SetProperty(c => c.IdPaciente, consulta.IdPaciente)
+                                                                    .SetProperty(c => c.DataMarcacaoConsulta, consulta.DataMarcacaoConsulta)
+                                                                    .SetProperty(c => c.ConsultaAprovada, consulta.ConsultaAprovada));
+
+                return (resultConsulta > 0);
+            }
+            catch 
+            {
+                return false;            
+            }
+            
+        }
+
         public async Task<bool> DeleteConsulta(int idConsulta, int idHistoricoConsulta)
         {
             try 
@@ -118,6 +139,26 @@ namespace DataAccess_TechChallengeFiap.Consultas.Commands
             {
                 return new HorarioDiaEntity();
             }
+        }
+
+        public async Task<HorarioDiaEntity> GetHorarioDiaId(int idHorarioDia)
+        {
+            try 
+            {
+                return await context.HorariosDias.Where(h => h.Id == idHorarioDia).FirstAsync();
+            }
+            catch { return new HorarioDiaEntity();}
+        
+        }
+
+        public async Task<HorarioEntity> GetHorarioId(int idHorario)
+        {
+            try
+            {
+                return await context.Horarios.Where(h => h.Id == idHorario).FirstAsync();
+            }
+            catch { return new HorarioEntity(); }
+
         }
 
         public async Task<ConsultaEntity> GetConsulta(int idConsulta) 

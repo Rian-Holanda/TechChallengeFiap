@@ -12,6 +12,7 @@ namespace Entity_TechChallengeFiap.Entities
         public int IdHorarioInicio { get; set; }
         public int IdHorarioFim {  get; set; }
         public int IdDia { get; set; }
+        public int IdMedico { get; set; }
         public List<HistoricoConsultasEntity>? HistoricoConsulta { get; set; }
         public DiaEntity? Dia { get; set; }
 

@@ -13,7 +13,7 @@ namespace DataAccess_TechChallengeFiap.Consultas.Interface
     {
         public List<ListaHorarioDias> GetHorariosDias();
         public List<ConsultasMedico> GetConsultasDisponiveisMedico(int idMedico, DateTime dataConsulta, string dia);
-        public List<Consulta> GetHorariosConsultas();
+        public List<Consulta> GetHorariosConsultas(int idMedico);
         public List<Consulta> GetConsultasMedico(int idMedico);
         public List<Consulta> GetConsultasPaciente(int idPaciente);
 

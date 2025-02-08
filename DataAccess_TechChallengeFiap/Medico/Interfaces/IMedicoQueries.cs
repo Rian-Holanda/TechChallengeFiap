@@ -12,5 +12,6 @@ namespace DataAccess_TechChallengeFiap.Medico.Interfaces
     {
         Task<List<MedicoEntity>> GetMedicos();
         Task<MedicoEntity> GetMedico(int id);
+        Task<List<MedicoEntity>> GetMedicoPorEspecializacao(string especializacao);
     }
 }

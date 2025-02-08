@@ -82,7 +82,7 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
             }
         }
 
-        public  List<Consulta> GetHorariosConsultas()
+        public  List<Consulta> GetHorariosConsultas(int idMedico)
         {
             try
             {
@@ -90,6 +90,7 @@ namespace DataAccess_TechChallengeFiap.Consultas.Queries
                 {
                     using (SqlCommand cmd = new SqlCommand("PRC_HorariosConsultas", _dbConfig.connection))
                     {
+                        cmd.Parameters.AddWithValue("@idMedico", idMedico);
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 0;
 

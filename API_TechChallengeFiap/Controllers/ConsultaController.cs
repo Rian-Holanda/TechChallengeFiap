@@ -62,10 +62,10 @@ namespace API_TechChallengeFiap.Controllers
             }
         }
 
-        [HttpGet("GetHorariosConsultasMarcadas")]
-        public IActionResult GetHorariosConsultasMarcadas()
+        [HttpGet("GetHorariosConsultasMarcadas/id")]
+        public IActionResult GetHorariosConsultasMarcadas(int id)
         {
-            var horariosConsultas = _consultaQueries.GetHorariosConsultas();
+            var horariosConsultas = _consultaQueries.GetHorariosConsultas(id);
 
             if (horariosConsultas != null)
             {
@@ -154,7 +154,7 @@ namespace API_TechChallengeFiap.Controllers
 
             else
             {
-                return NoContent();
+                return Ok("Data possui agendamento ");
             }
         }
 

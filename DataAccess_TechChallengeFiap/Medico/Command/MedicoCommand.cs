@@ -117,6 +117,40 @@ namespace DataAccess_TechChallengeFiap.Medico.Command
                 return false;
             }
         }
+
+        public async Task<int> InsertHorarioAgenda(HorarioDiaEntity horarioDiaEntity)
+        {
+            try 
+            {
+                var result = await context.HorariosDias.AddAsync(horarioDiaEntity);
+                await context.SaveChangesAsync();
+
+                return (horarioDiaEntity.Id);
+            }
+            catch 
+            {
+                return 0;
+            }
+        }
+
+        public async Task<bool> UpdateHorarioAgenda(HorarioDiaEntity horarioDiaEntity)
+        {
+            try
+            {
+                var result = await context.HorariosDias
+                            .Where(m => m.Id == horarioDiaEntity.Id)
+                            .ExecuteUpdateAsync(setters => setters
+                                                           .SetProperty(m => m.IdDia, horarioDiaEntity.IdDia)
+                                                           .SetProperty(m => m.IdHorarioInicio, horarioDiaEntity.IdHorarioInicio)
+                                                           .SetProperty(m => m.IdHorarioFim, horarioDiaEntity.IdHorarioFim));
+
+                return (result > 0);
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
 

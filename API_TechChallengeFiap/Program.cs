@@ -43,8 +43,6 @@ builder.Services.AddScoped<IPacienteCommand, PacienteCommand>();
 builder.Services.AddScoped<IPacienteQueries, PacienteQueries>();
 builder.Services.AddScoped<IMedicoCommand, MedicoCommand>();
 builder.Services.AddScoped<IMedicoQueries, MedicoQueries>();
-
-
 builder.Services.AddScoped<IMedicoCommand,   MedicoCommand>();
 builder.Services.AddScoped<IConsultaBusiness, ConsultaBusiness>();
 
