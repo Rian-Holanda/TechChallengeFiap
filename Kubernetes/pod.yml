@@ -1,0 +1,8 @@
+apiVersion: v1  
+kind: Pod  
+metadata:  
+  name: apitechchallengefiap  
+spec: 
+  containers:  
+  - name: apitechchallengefiap  
+    image: rianholanda91/apitechchallengefiap:latest
