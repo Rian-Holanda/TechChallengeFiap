@@ -7,10 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Medico\Application\**" />
+    <Compile Remove="Medico\Domain\**" />
+    <EmbeddedResource Remove="Medico\Application\**" />
+    <EmbeddedResource Remove="Medico\Domain\**" />
+    <None Remove="Medico\Application\**" />
+    <None Remove="Medico\Domain\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Autenticacao\Identity\" />
-    <Folder Include="Medico\Application\Interfaces\" />
-    <Folder Include="Medico\Domain\" />
-    <Folder Include="Medico\Application\" />
+    <Folder Include="Medico\" />
     <Folder Include="Paciente\Application\Interfaces\" />
     <Folder Include="Paciente\Domain\" />
     <Folder Include="Paciente\Application\" />
