@@ -9,6 +9,8 @@ namespace Infrastructure_FiapTechChallenge
     {
         private readonly IConfiguration _configuration = configuration;
 
+     
+
         public required DbSet<MedicoEntity> Medicos { get; set; }
         public required DbSet<PacienteEntity> Pacientes { get; set; }
         public required DbSet<ConsultaEntity> Consultas { get; set; }
@@ -61,7 +63,8 @@ namespace Infrastructure_FiapTechChallenge
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.IdMedico);
                 entity.Property(e => e.IdPaciente);
-                entity.Property(e => e.DataConsulta);
+                entity.Property(e => e.DataMarcacaoConsulta);
+                entity.Property(e => e.ConsultaAprovada);
                 entity.HasOne(e => e.Medico)
                       .WithMany(e => e.Consultas)
                       .HasForeignKey(e => e.IdMedico);
@@ -80,8 +83,8 @@ namespace Infrastructure_FiapTechChallenge
                       .WithOne(e => e.HistoricoConsulta)
                       .HasForeignKey<HistoricoConsultasEntity>(e => e.IdConsuta);
                 entity.HasOne(e => e.HorarioDia)
-                     .WithOne(e => e.HistoricoConsulta)
-                     .HasForeignKey<HistoricoConsultasEntity>(e => e.IdHorarioDia);
+                     .WithMany(e => e.HistoricoConsulta)
+                     .HasForeignKey(e => e.IdHorarioDia);
 
             });
 

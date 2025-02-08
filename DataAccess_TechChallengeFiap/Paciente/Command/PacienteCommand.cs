@@ -20,7 +20,46 @@ namespace DataAccess_TechChallengeFiap.Paciente.Command
             this.logger = logger;
         }
 
-  
+        public async Task<List<PacienteEntity>> GetPacientes()
+        {
+            try
+            {
+                var pacientes = await context.Pacientes.ToListAsync();
+
+                //var PacientesEntity =  (List<PacienteEntity>) Pacientes.Result.ToList();
+
+                return pacientes;
+
+            }
+            catch
+            {
+                return new List<PacienteEntity>();
+            }
+        }
+        public async Task<PacienteEntity> GetPaciente(int id)
+        {
+            try
+            {
+                return await context.Pacientes.Where(p => p.Id == id).FirstAsync();
+            }
+            catch
+            {
+                return new PacienteEntity();
+            }
+        }
+
+        public async Task<PacienteEntity> GetPacientePorNome(string nome)
+        {
+            try
+            {
+                return await context.Pacientes.Where(p => p.Nome == nome).FirstAsync();
+            }
+            catch
+            {
+                return new PacienteEntity();
+            }
+        }
+
         public async Task<int> InsertPaciente(PacienteEntity paciente)
         {
             try

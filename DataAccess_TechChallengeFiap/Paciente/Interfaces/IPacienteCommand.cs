@@ -11,6 +11,9 @@ namespace DataAccess_TechChallengeFiap.Paciente.Interfaces
 {
     public interface IPacienteCommand
     {
+        Task<List<PacienteEntity>> GetPacientes();
+        Task<PacienteEntity> GetPaciente(int id);
+        Task<PacienteEntity> GetPacientePorNome(string nome);
         Task<int> InsertPaciente(PacienteEntity paciente);
         Task<bool> UpdatePaciente(int id, PacienteRepository paciente);
         Task<bool> DeletePaciente(int id);

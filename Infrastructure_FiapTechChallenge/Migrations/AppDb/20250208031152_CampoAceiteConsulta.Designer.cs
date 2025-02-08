@@ -4,6 +4,7 @@ using Infrastructure_FiapTechChallenge;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure_FiapTechChallenge.Migrations.AppDb
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250208031152_CampoAceiteConsulta")]
+    partial class CampoAceiteConsulta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +32,6 @@ namespace Infrastructure_FiapTechChallenge.Migrations.AppDb
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("ConsultaAprovada")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("DataMarcacaoConsulta")
                         .HasColumnType("datetime2");
@@ -111,9 +111,6 @@ namespace Infrastructure_FiapTechChallenge.Migrations.AppDb
                     b.Property<int>("IdHorarioInicio")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdMedico")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IdDia");
@@ -151,9 +148,6 @@ namespace Infrastructure_FiapTechChallenge.Migrations.AppDb
 
                     b.Property<string>("CRM")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Especializacao")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")

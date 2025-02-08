@@ -1,4 +1,5 @@
-﻿using Entity_TechChallengeFiap.Entities;
+﻿using DataAccess_TechChallengeFiap.Repository;
+using Entity_TechChallengeFiap.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,11 +11,11 @@ namespace DataAccess_TechChallengeFiap.Consultas.Interface
 {
     public interface IConsultaQueries
     {
-        public Task<DataTable> GetHorariosDias();
-        public Task<DataTable> GetConsultasDisponiveisMedico(int idMedico);
-        public Task<DataTable> GetHorariosConsultas();
-        public Task<DataTable> GetConsultasMedico(int idMedico);
-        public Task<DataTable> GetConsultasPaciente(int idPaciente);
+        public List<ListaHorarioDias> GetHorariosDias();
+        public List<ConsultasMedico> GetConsultasDisponiveisMedico(int idMedico, DateTime dataConsulta, string dia);
+        public List<Consulta> GetHorariosConsultas(int idMedico);
+        public List<Consulta> GetConsultasMedico(int idMedico);
+        public List<Consulta> GetConsultasPaciente(int idPaciente);
 
     }
 }

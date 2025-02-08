@@ -4,6 +4,7 @@ using Infrastructure_FiapTechChallenge;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure_FiapTechChallenge.Migrations.AppDb
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250207025724_CampoData")]
+    partial class CampoData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +32,6 @@ namespace Infrastructure_FiapTechChallenge.Migrations.AppDb
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("ConsultaAprovada")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("DataMarcacaoConsulta")
                         .HasColumnType("datetime2");
@@ -89,7 +89,8 @@ namespace Infrastructure_FiapTechChallenge.Migrations.AppDb
                     b.HasIndex("IdConsuta")
                         .IsUnique();
 
-                    b.HasIndex("IdHorarioDia");
+                    b.HasIndex("IdHorarioDia")
+                        .IsUnique();
 
                     b.ToTable("tb_HistoricoConsulta", (string)null);
                 });
@@ -109,9 +110,6 @@ namespace Infrastructure_FiapTechChallenge.Migrations.AppDb
                         .HasColumnType("int");
 
                     b.Property<int>("IdHorarioInicio")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdMedico")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -151,9 +149,6 @@ namespace Infrastructure_FiapTechChallenge.Migrations.AppDb
 
                     b.Property<string>("CRM")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Especializacao")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
@@ -220,8 +215,8 @@ namespace Infrastructure_FiapTechChallenge.Migrations.AppDb
                         .IsRequired();
 
                     b.HasOne("Entity_TechChallengeFiap.Entities.HorarioDiaEntity", "HorarioDia")
-                        .WithMany("HistoricoConsulta")
-                        .HasForeignKey("IdHorarioDia")
+                        .WithOne("HistoricoConsulta")
+                        .HasForeignKey("Entity_TechChallengeFiap.Entities.HistoricoConsultasEntity", "IdHorarioDia")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

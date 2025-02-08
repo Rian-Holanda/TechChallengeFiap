@@ -4,6 +4,7 @@ using DataAccess_TechChallengeFiap.Paciente.Interfaces;
 using Entity_TechChallengeFiap.Entities;
 using Infrastructure_FiapTechChallenge;
 using Infrastructure_FiapTechChallenge.Config;
+using Infrastructure_FiapTechChallenge.Migrations.AppDb;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -96,6 +97,7 @@ namespace API_TechChallengeFiap.Controllers
                             Nome = model.Nome,
                             CRM = model.CRM,
                             CPF = model.CPF,
+                            Especializacao = model.Especializacao,
                             UserId = Guid.Parse(user.Id)
                         };
 

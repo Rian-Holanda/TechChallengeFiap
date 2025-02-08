@@ -46,5 +46,17 @@ namespace DataAccess_TechChallengeFiap.Medico.Queries
                 return new MedicoEntity();
             }
         }
+
+        public async Task<List<MedicoEntity>> GetMedicoPorEspecializacao(string especializacao)
+        {
+            try 
+            {
+                return await _context.Medicos.Where(m => m.Especializacao == especializacao).ToListAsync();
+            }
+            catch 
+            {
+                return new List<MedicoEntity>();
+            }
+        }
     }
 }

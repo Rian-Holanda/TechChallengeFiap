@@ -13,6 +13,7 @@ namespace API_TechChallengeFiap.Models
         public required string CPF { get; set; }
 
         public string? CRM { get; set; }
+        public string? Especializacao { get; set; }
 
         public bool IsMedico { get; set; }
 

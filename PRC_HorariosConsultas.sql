@@ -5,9 +5,10 @@ as
 select
     medico.Nome as Medico,
 	paciente.Nome as Paciente,
-	consulta.DataConsulta,
+	consulta.DataMarcacaoConsulta,
 	dia.Dia,
-	HorarioInicio.Horario
+	HorarioInicio.Horario,
+	historico.DataConsulta
 from tb_Consulta consulta 
 inner join tb_HistoricoConsulta historico on historico.IdConsuta = consulta.Id
 inner join tb_HorarioDia horarioDia on horarioDia.Id = historico.IdHorarioDia
