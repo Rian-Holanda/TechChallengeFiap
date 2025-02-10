@@ -22,13 +22,13 @@ namespace Infrastructure_FiapTechChallenge.Util.Email
                 var smtpClient = new SmtpClient("smtp.office365.com")
                 {
                     Port = 587,
-                    Credentials = new NetworkCredential("robot.consultores01@rvc.law", "robot@@2019@!"),
+                    Credentials = new NetworkCredential("email", "senha"),
                     EnableSsl = true,
                 };
 
                 var mailMessage = new MailMessage
                 {
-                    From = new MailAddress("robot.consultores01@rvc.law"),
+                    From = new MailAddress("email"),
                     Subject = "HACKATOON FIAP - Consulta aprovada com sucesso",
                     Body = "<h5>Olá " + paciente +"<h5><br>Sua consulta com o Dr." + medico + " foi aprovada.<br> A consulta será : " + data + " as " + horario ,
                     IsBodyHtml = true,

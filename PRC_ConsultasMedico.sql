@@ -1,4 +1,4 @@
-﻿create or alter procedure PRC_ConsultasMedico
+﻿CREATE OR ALTER   procedure [dbo].[PRC_ConsultasMedico]
 
 @IdMedico int
 
@@ -20,3 +20,4 @@ inner join tb_Medico medico on medico.Id = consulta.IdMedico
 inner join tb_Paciente paciente on paciente.Id = consulta.IdPaciente
 where medico.Id = @IdMedico 
 and consulta.IdMedico = @IdMedico
+and consulta.ConsultaAprovada = 1

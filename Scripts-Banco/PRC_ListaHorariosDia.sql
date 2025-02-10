@@ -1,4 +1,4 @@
-﻿create procedure PRC_ListaHorariosDia
+﻿CREATE OR ALTER   procedure [dbo].[PRC_ListaHorariosDia]
 
 As
 
